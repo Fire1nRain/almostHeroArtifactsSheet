@@ -1,0 +1,834 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>统计</title>
+</head>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+
+<script>
+    var attributes = [{"name": "英雄升级成本", "currentValue": 0, "maxValue": 90, "id": 0}, {
+        "name": "英雄暴击率",
+        "currentValue": 0,
+        "maxValue": 40,
+        "id": 1
+    }, {"name": "英雄暴击伤害", "currentValue": 0, "maxValue": 600, "id": 2}, {
+        "name": "英雄伤害",
+        "currentValue": 0,
+        "id": 3
+    }, {"name": "英雄能力伤害", "currentValue": 0, "maxValue": 300, "id": 4}, {
+        "name": "无技能英雄伤害",
+        "currentValue": 0,
+        "maxValue": 500,
+        "id": 5
+    }, {"name": "戒指升级成本", "currentValue": 0, "maxValue": 90, "id": 6}, {
+        "name": "戒指暴击率",
+        "currentValue": 0,
+        "maxValue": 40,
+        "id": 7
+    }, {"name": "戒指暴击伤害", "currentValue": 0, "maxValue": 600, "id": 8}, {
+        "name": "戒指伤害",
+        "currentValue": 0,
+        "id": 9
+    }, {"name": "老怪存续时间", "currentValue": 0, "maxValue": 60, "id": 10}, {
+        "name": "礼物龙产出率",
+        "currentValue": 0,
+        "maxValue": 200,
+        "id": 11
+    }, {"name": "免费包冷却时间", "currentValue": 0, "maxValue": 75, "id": 12}, {
+        "name": "跳过一波敌人的机会",
+        "currentValue": 0,
+        "maxValue": 95,
+        "id": 13
+    }, {"name": "自动攻击持续时间", "currentValue": 0, "maxValue": 16, "id": 14}, {
+        "name": "自动使用道具限制",
+        "currentValue": 0,
+        "maxValue": 6,
+        "id": 15
+    }, {"name": "金袋道具限制", "currentValue": 0, "maxValue": 8, "id": 16}, {
+        "name": "快速升级道具限制",
+        "currentValue": 0,
+        "maxValue": 6,
+        "id": 17
+    }, {"name": "金袋价值", "currentValue": 0, "maxValue": 300, "id": 18}, {
+        "name": "快速升级速度",
+        "currentValue": 0,
+        "maxValue": 200,
+        "id": 19
+    }, {"name": "快速升级持续时间", "currentValue": 0, "maxValue": 300, "id": 20}, {
+        "name": "敌人快速繁衍",
+        "currentValue": 0,
+        "maxValue": 800,
+        "id": 21
+    }, {"name": "宝藏地精机会", "currentValue": 0, "maxValue": 400, "id": 22}, {
+        "name": "金币包加成",
+        "currentValue": 0,
+        "id": 23
+    }, {"name": "老怪金币奖励", "currentValue": 0, "maxValue": 500, "id": 24}, {
+        "name": "宝藏地精金币",
+        "currentValue": 0,
+        "maxValue": 1000,
+        "id": 25
+    }, {"name": "10倍金币加成几率", "currentValue": 0, "maxValue": 100, "id": 26}, {
+        "name": "离线收入",
+        "currentValue": 0,
+        "maxValue": 800,
+        "id": 27
+    }, {"name": "影遁奖励", "currentValue": 0, "maxValue": 1500, "id": 28}, {
+        "name": "全局伤害加成",
+        "currentValue": 0,
+        "id": 29
+    }, {"name": "从史诗级老怪那里获得的神石", "currentValue": 0, "maxValue": 300, "id": 30}, {
+        "name": "技能等级要求",
+        "currentValue": 0,
+        "maxValue": 8,
+        "id": 31
+    }, {"name": "英雄终极冷却时间", "currentValue": 0, "maxValue": 50, "id": 32}, {
+        "name": "老怪生命",
+        "currentValue": 0,
+        "maxValue": 90,
+        "id": 33
+    }, {"name": "全局生命加成", "currentValue": 0, "id": 34}, {
+        "name": "英雄复活时间",
+        "currentValue": 0,
+        "maxValue": 65,
+        "id": 35
+    }, {"name": "非老怪敌人生命", "currentValue": 0, "maxValue": 90, "id": 36}, {
+        "name": "非老怪敌人伤害",
+        "currentValue": 0,
+        "maxValue": 90,
+        "id": 37
+    }, {"name": "老怪伤害", "currentValue": 0, "maxValue": 90, "id": 38}];
+
+    var artifacts = [{
+        "attr1": 25,
+        "value1": 1000,
+        "attr2": 29,
+        "value2": 12.5,
+        "attr3": 23,
+        "value3": 12.5,
+        "attr4": -1,
+        "value4": 0,
+        "id": 0,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 5,
+        "value1": 500,
+        "attr2": 29,
+        "value2": 10.2,
+        "attr3": 34,
+        "value3": 27.3,
+        "attr4": -1,
+        "value4": 0,
+        "id": 1,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 12,
+        "value1": 40,
+        "attr2": 29,
+        "value2": 29.2,
+        "attr3": "-1",
+        "value3": 0,
+        "attr4": -1,
+        "value4": 0,
+        "id": 2,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 4,
+        "value1": 51,
+        "attr2": 21,
+        "value2": 31,
+        "attr3": 34,
+        "value3": 37.2,
+        "attr4": -1,
+        "value4": 0,
+        "id": 3,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 28,
+        "value1": 77,
+        "attr2": 8,
+        "value2": 128,
+        "attr3": 34,
+        "value3": 8.14,
+        "attr4": -1,
+        "value4": 0,
+        "id": 4,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 22,
+        "value1": 124,
+        "attr2": 28,
+        "value2": 189,
+        "attr3": 9,
+        "value3": 34.1,
+        "attr4": -1,
+        "value4": 0,
+        "id": 5,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 36,
+        "value1": 6,
+        "attr2": 13,
+        "value2": 56,
+        "attr3": 34,
+        "value3": 46.7,
+        "attr4": -1,
+        "value4": 0,
+        "id": 6,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 28,
+        "value1": 426,
+        "attr2": 23,
+        "value2": 18.8,
+        "attr3": -1,
+        "value3": 0,
+        "attr4": -1,
+        "value4": 0,
+        "id": 7,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 0,
+        "value1": 32,
+        "attr2": 21,
+        "value2": 11,
+        "attr3": 9,
+        "value3": 5.5,
+        "attr4": -1,
+        "value4": 0,
+        "id": 8,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 37,
+        "value1": 12,
+        "attr2": 34,
+        "value2": 23.9,
+        "attr3": 29,
+        "value3": 8.96,
+        "attr4": -1,
+        "value4": 0,
+        "id": 9,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 28,
+        "value1": 285,
+        "attr2": 37,
+        "value2": 14,
+        "attr3": -1,
+        "value3": 0,
+        "attr4": -1,
+        "value4": 0,
+        "id": 10,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 19,
+        "value1": 200,
+        "attr2": 2,
+        "value2": 175,
+        "attr3": 29,
+        "value3": 13.1,
+        "attr4": -1,
+        "value4": 0,
+        "id": 11,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 35,
+        "value1": 31,
+        "attr2": 28,
+        "value2": 300,
+        "attr3": 9,
+        "value3": 31.5,
+        "attr4": -1,
+        "value4": 0,
+        "id": 12,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 26,
+        "value1": 41,
+        "attr2": 10,
+        "value2": 12,
+        "attr3": 23,
+        "value3": 18.1,
+        "attr4": -1,
+        "value4": 0,
+        "id": 13,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 28,
+        "value1": 100,
+        "attr2": 4,
+        "value2": 249,
+        "attr3": -1,
+        "value3": 0,
+        "attr4": -1,
+        "value4": 0,
+        "id": 14,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 21,
+        "value1": 15,
+        "attr2": 35,
+        "value2": 31,
+        "attr3": 22,
+        "value3": 276,
+        "attr4": 0,
+        "value4": 17,
+        "id": 15,
+        "attr5": 23,
+        "value5": 2.68
+    }, {
+        "attr1": 31,
+        "value1": 7,
+        "attr2": 21,
+        "value2": 50,
+        "attr3": 17,
+        "value3": 6,
+        "attr4": -1,
+        "value4": 0,
+        "id": 16,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 32,
+        "value1": 30,
+        "attr2": 24,
+        "value2": 254,
+        "attr3": 34,
+        "value3": 63.5,
+        "attr4": -1,
+        "value4": 0,
+        "id": 17,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 1,
+        "value1": 33,
+        "attr2": 29,
+        "value2": 14.5,
+        "attr3": 34,
+        "value3": 38.6,
+        "attr4": -1,
+        "value4": 0,
+        "id": 18,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 0,
+        "value1": 41,
+        "attr2": 29,
+        "value2": 8.56,
+        "attr3": 34,
+        "value3": 22.8,
+        "attr4": -1,
+        "value4": 0,
+        "id": 19,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 21,
+        "value1": 71,
+        "attr2": 34,
+        "value2": 23.2,
+        "attr3": 29,
+        "value3": 8.71,
+        "attr4": -1,
+        "value4": 0,
+        "id": 20,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 20,
+        "value1": 120,
+        "attr2": 29,
+        "value2": 32,
+        "attr3": -1,
+        "value3": 0,
+        "attr4": -1,
+        "value4": 0,
+        "id": 21,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 30,
+        "value1": 50,
+        "attr2": 7,
+        "value2": 40,
+        "attr3": 26,
+        "value3": 50,
+        "attr4": 23,
+        "value4": 2.47,
+        "id": 22,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 21,
+        "value1": 50,
+        "attr2": 27,
+        "value2": 380,
+        "attr3": 3,
+        "value3": 33.5,
+        "attr4": -1,
+        "value4": 0,
+        "id": 23,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 33,
+        "value1": 45,
+        "attr2": 26,
+        "value2": 9,
+        "attr3": 18,
+        "value3": 51,
+        "attr4": 23,
+        "value4": 23.4,
+        "id": 24,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 12,
+        "value1": 35,
+        "attr2": 29,
+        "value2": 15.3,
+        "attr3": 34,
+        "value3": 40.7,
+        "attr4": -1,
+        "value4": 0,
+        "id": 25,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 2,
+        "value1": 304,
+        "attr2": 32,
+        "value2": 20,
+        "attr3": 16,
+        "value3": 5,
+        "attr4": -1,
+        "value4": 0,
+        "id": 26,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 11,
+        "value1": 103,
+        "attr2": 28,
+        "value2": 124,
+        "attr3": 21,
+        "value3": 20,
+        "attr4": -1,
+        "value4": 0,
+        "id": 27,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 14,
+        "value1": 16,
+        "attr2": 23,
+        "value2": 3.54,
+        "attr3": 29,
+        "value3": 3.54,
+        "attr4": -1,
+        "value4": 0,
+        "id": 28,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 8,
+        "value1": 212,
+        "attr2": 20,
+        "value2": 120,
+        "attr3": 2,
+        "value3": 114,
+        "attr4": 33,
+        "value4": 45,
+        "id": 29,
+        "attr5": 29,
+        "value5": 14.6
+    }, {
+        "attr1": 15,
+        "value1": 6,
+        "attr2": 23,
+        "value2": 8.47,
+        "attr3": 29,
+        "value3": 8.47,
+        "attr4": -1,
+        "value4": 0,
+        "id": 30,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 1,
+        "value1": 7,
+        "attr2": 35,
+        "value2": 4,
+        "attr3": 3,
+        "value3": 52.1,
+        "attr4": -1,
+        "value4": 0,
+        "id": 31,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 2,
+        "value1": 107,
+        "attr2": 6,
+        "value2": 90,
+        "attr3": 23,
+        "value3": 18.3,
+        "attr4": -1,
+        "value4": 0,
+        "id": 32,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 10,
+        "value1": 46,
+        "attr2": 27,
+        "value2": 420,
+        "attr3": 9,
+        "value3": 28.5,
+        "attr4": -1,
+        "value4": 0,
+        "id": 33,
+        "attr5": -1,
+        "value5": 0
+    }, {
+        "attr1": 38,
+        "value1": 34,
+        "attr2": 9,
+        "value2": 14.1,
+        "attr3": 34,
+        "value3": 23.5,
+        "attr4": -1,
+        "value4": 0,
+        "id": 34,
+        "attr5": -1,
+        "value5": 0
+    }];
+</script>
+<style type="text/css">
+
+    .wrapper {
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .maxedOut {
+        font-weight: 600;
+        color: darkorange;
+    }
+
+    .highlight {
+        background-color: green;
+    }
+
+    .dropdown-menu > li > a {
+        padding: 0 10px;
+    }
+
+</style>
+<script type="x-template" id="artifactComp">
+    <div class="form-group">
+        <label>序号：{{artifact.id+1}}</label>
+        <form class="form-inline">
+            <ul>
+                <li :class="{'highlight': attributes[artifact.attr1]!==undefined && attributes[artifact.attr1].highlight}">
+                    <label>
+                        属性1：
+                        <select class="form-control input-sm" v-model.number="artifact.attr1" @change="change"
+                                style="background-color: inherit">
+                            <option value="-1"></option>
+                            <option v-for="item in attributes" :value="item.id">{{item.name}}</option>
+                        </select>
+                    </label>
+                    <label>
+                        值1：
+                        <input class="form-control input-sm" type="number" v-model.number="artifact.value1"
+                               @input="change"
+                               style="background-color: inherit">
+                    </label>
+                </li>
+                <li :class="{'highlight': attributes[artifact.attr2]!==undefined && attributes[artifact.attr2].highlight}">
+                    <label>
+                        属性2：
+                        <select class="form-control input-sm" v-model.number="artifact.attr2" @change="change"
+                                style="background-color: inherit">
+                            <option value="-1"></option>
+                            <option v-for="item in attributes" :value="item.id">{{item.name}}</option>
+                        </select>
+                    </label>
+                    <label>
+                        值2：
+                        <input class="form-control input-sm" type="number" v-model.number="artifact.value2"
+                               @input="change"
+                               style="background-color: inherit">
+                    </label>
+                </li>
+                <li :class="{'highlight': attributes[artifact.attr3]!==undefined && attributes[artifact.attr3].highlight}">
+                    <label>
+                        属性3：
+                        <select class="form-control input-sm" v-model.number="artifact.attr3" @change="change"
+                                style="background-color: inherit">
+                            <option value="-1"></option>
+                            <option v-for="item in attributes" :value="item.id">{{item.name}}</option>
+                        </select>
+                    </label>
+                    <label>
+                        值3：
+                        <input class="form-control input-sm" type="number" v-model.number="artifact.value3"
+                               @input="change"
+                               style="background-color: inherit">
+                    </label>
+                </li>
+                <li :class="{'highlight': attributes[artifact.attr4]!==undefined && attributes[artifact.attr4].highlight}">
+                    <label>
+                        属性4：
+                        <select class="form-control input-sm" v-model.number="artifact.attr4" @change="change"
+                                style="background-color: inherit">
+                            <option value="-1"></option>
+                            <option v-for="item in attributes" :value="item.id">{{item.name}}</option>
+                        </select>
+                    </label>
+                    <label>
+                        值4：
+                        <input class="form-control input-sm" type="number" v-model.number="artifact.value4"
+                               @input="change"
+                               style="background-color: inherit">
+                    </label>
+                </li>
+                <li :class="{'highlight': attributes[artifact.attr5]!==undefined && attributes[artifact.attr5].highlight}">
+                    <label>
+                        属性5：
+                        <select class="form-control input-sm" v-model.number="artifact.attr5" @change="change"
+                                style="background-color: inherit">
+                            <option value="-1"></option>
+                            <option v-for="item in attributes" :value="item.id">{{item.name}}</option>
+                        </select>
+                    </label>
+                    <label>
+                        值5：
+                        <input class="form-control input-sm" type="number" v-model.number="artifact.value5"
+                               @input="change"
+                               style="background-color: inherit">
+                    </label>
+                </li>
+            </ul>
+        </form>
+    </div>
+</script>
+<body>
+<div id="app" style="margin-top: 0.5%">
+    <div class="wrapper">
+        <div style="width: 25%;height: 97%;overflow: auto">
+            <button @click="save" class="btn btn-primary">保存</button>
+            <button @click="importArtifacts" class="btn btn-default">导入</button>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    排序 <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#" @click="sortArtifacts(-1)">无排序</a></li>
+                    <li v-for="item in attributes"><a href="#" @click="sortArtifacts(item.id)">{{item.name}}</a></li>
+                </ul>
+            </div>
+            <label>
+                <input type="checkbox" v-model="sortAtHighlight">高亮时排序
+            </label>
+            <table border="1" style="margin-top: 1%;text-align: center">
+                <tr v-for="(item,index) in attributes" @click="attrClick(index)" :class="{'highlight':item.highlight}">
+                    <td style="width: 40%">{{item.name}}</td>
+                    <td style="width: 30%"
+                        :class="{'maxedOut': (item.maxValue !== null) && item.currentValue >= item.maxValue}">
+                        {{item.currentValue}}
+                    </td>
+                    <td style="width: 30%"
+                        :class="{'maxedOut': (item.maxValue !== null) && item.currentValue >= item.maxValue}">
+                        {{item.maxValue}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="width: 65%;border: 1px solid black;flex-flow: wrap;height: 97%;overflow: auto;margin-top: 0.5%"
+             class="wrapper">
+            <artifact v-on:arc="calculate" v-for="item in artifacts" :artifact="item" :attributes="attributes"
+                      :key="item.id">
+            </artifact>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    Vue.component("artifact", {
+        template: "#artifactComp",
+        props: ["artifact", "attributes"],
+        mounted: function () {
+        },
+        methods: {
+            change: function () {
+                this.$emit("arc");
+            }
+        }
+    });
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            attributes: attributes,
+            artifacts: artifacts,
+            sortAtHighlight: true
+        },
+        methods: {
+            save: function () {
+                localStorage.setItem("attr", JSON.stringify(this.attributes));
+                localStorage.setItem("arti", JSON.stringify(this.artifacts));
+                console.log(this.attributes);
+                console.log(this.artifacts);
+                console.log(JSON.stringify(this.artifacts));
+                alert("保存成功");
+            },
+            importArtifacts: function () {
+                var jsonStr = prompt("Json数据：", "");
+                if (jsonStr) {
+                    try {
+                        this.artifacts = JSON.parse(jsonStr);
+                        alert("导入成功");
+                    } catch (err) {
+                        alert("导入失败:" + err);
+                    }
+                }
+            },
+            calculate: function () {
+                this.$nextTick(function () {
+                    var _this = this;
+                    this.attributes.forEach(function (item) {
+                        item.currentValue = 0;
+                    });
+                    this.artifacts.forEach(function (artifact) {
+                        if (artifact.attr1 !== -1)
+                            _this.attributes[artifact.attr1].currentValue += (artifact.value1);
+                        if (artifact.attr2 !== -1)
+                            _this.attributes[artifact.attr2].currentValue += (artifact.value2);
+                        if (artifact.attr3 !== -1)
+                            _this.attributes[artifact.attr3].currentValue += (artifact.value3);
+                        if (artifact.attr4 !== -1)
+                            _this.attributes[artifact.attr4].currentValue += (artifact.value4);
+                        if (artifact.attr5 !== -1)
+                            _this.attributes[artifact.attr5].currentValue += (artifact.value5);
+                    });
+                    this.attributes.forEach(function (item) {
+                        if (item.currentValue !== Math.round(item.currentValue))
+                            item.currentValue = item.currentValue.toFixed(2);
+                    })
+                });
+            },
+            attrClick: function (index) {
+                var highlighted = this.attributes[index].highlight;
+                this.attributes.forEach(function (t) {
+                    t.highlight = false;
+                });
+                if (!highlighted) {
+                    this.attributes[index].highlight = true;
+                    if (this.sortAtHighlight)
+                        this.artifacts.sort(artifactSort(index));
+                } else {
+                    if (this.sortAtHighlight)
+                        this.artifacts.sort(artifactSort(-1));
+                }
+            },
+            sortArtifacts: function (id) {
+                this.artifacts.sort(artifactSort(id));
+            }
+        },
+        mounted: function () {
+            var attrText = localStorage.getItem("attr");
+            if (attrText !== null) {
+                this.attributes = JSON.parse(attrText);
+                console.log("属性读取成功");
+            }
+
+            var artiText = localStorage.getItem("arti");
+            if (artiText !== null) {
+                this.artifacts = JSON.parse(artiText);
+                console.log("神器读取成功");
+            }
+
+            this.calculate();
+
+        },
+        watch: {
+            sortAtHighlight: function (newValue) {
+                if (!newValue)
+                    this.artifacts.sort(artifactSort(-1));
+                else {
+                    var index = -1;
+                    this.attributes.forEach(function (item, i) {
+                        if (item.highlight)
+                            index = i;
+                    });
+                    this.artifacts.sort(artifactSort(index));
+                }
+
+            }
+        }
+    });
+
+    function artifactSort(index) {
+        if (index === -1)
+            return function (a, b) {
+                return a.id - b.id
+            };
+        else
+            return function (a, b) {
+                var value1 = null;
+                var value2 = null;
+                for (var i = 1; i < 6; i++) {
+                    if (a["attr" + i] === index)
+                        value1 = a["value" + i];
+                    if (b["attr" + i] === index)
+                        value2 = b["value" + i];
+                }
+                if (value1 === null && value2 === null)
+                    return a["id"] - b["id"];
+                else if (value1 === null)
+                    return 1;
+                else if (value2 === null)
+                    return -1;
+                else
+                    return value2 - value1;
+            };
+    }
+</script>
+</html>
