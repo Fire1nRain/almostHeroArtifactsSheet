@@ -654,9 +654,23 @@
     <div class="wrapper">
         <div style="width: 25%;height: 97%;overflow: auto">
             <button @click="save" class="btn btn-primary">保存</button>
-            <button @click="importArtifacts" class="btn btn-default">导入</button>
             <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    导入/导出 <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#" @click="importArtifacts">剪贴板导入</a></li>
+                    <li><a href="#" @click="openFileSelect">文件导入</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#exportModal">剪贴板导出</a></li>
+                    <li><a href="#" @click="exportArtifactsToFile">文件导出</a></li>
+                </ul>
+            </div>
+            <!--<button data-toggle="modal" data-target="#exportModal" class="btn btn-info">导出</button>-->
+            <!--<button @click="importArtifacts" class="btn btn-warning">剪贴板导入</button>-->
+            <!--<button class="btn btn-warning">文件导入</button>-->
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                     排序 <span class="caret"></span>
                 </button>
@@ -689,6 +703,29 @@
             </artifact>
         </div>
     </div>
+
+    <input type="file" id="file" name="file" hidden @change="importArtifactsFromFile" accept="application/json"/>
+
+    <div id="exportModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="artifactsJson">你的神器数据：</label>
+                        <textarea class="form-control" id="artifactsJson" onclick="this.select()" readonly>{{JSON.stringify(artifacts)}}</textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </div>
 </body>
 <script>
@@ -729,6 +766,48 @@
                         alert("导入失败:" + err);
                     }
                 }
+            },
+            openFileSelect: function () {
+                if (window.File && window.FileReader && window.FileList && window.Blob) {
+                    $("#file").click();
+                } else {
+                    alert('浏览器不支持File API，请从文件中拷贝出全部内容然后使用从剪贴板导入');
+                }
+            },
+            importArtifactsFromFile: function (evt) {
+                var file = evt.target.files[0];
+                var reader = new FileReader();
+
+                // Closure to capture the file information.
+                reader.onload = (function (theFile) {
+                    return function (e) {
+                        // Render thumbnail.
+                        try {
+                            this.artifacts = JSON.parse(e.target.result);
+                        } catch (err) {
+                            alert("导入失败：" + err)
+                        }
+                    };
+                })(file);
+
+                // Read in the image file as a data URL.
+                if (file !== undefined)
+                    reader.readAsText(file);
+
+            },
+            exportArtifactsToFile: function () {
+                // 创建隐藏的可下载链接
+                var eleLink = document.createElement('a');
+                eleLink.download = "artifacts.json";
+                eleLink.style.display = 'none';
+                // 字符内容转变成blob地址
+                var blob = new Blob([JSON.stringify(this.artifacts)]);
+                eleLink.href = URL.createObjectURL(blob);
+                // 触发点击
+                document.body.appendChild(eleLink);
+                eleLink.click();
+                // 然后移除
+                document.body.removeChild(eleLink);
             },
             calculate: function () {
                 this.$nextTick(function () {
